@@ -1,0 +1,19 @@
+ffmpeg -i input.mkv -vf "drawtext=fontfile=C\\:/Windows/Fonts/arial.ttf:text='Bui Thai Son, Ha Duyen Hung':fontcolor=black:fontsize=18:x=w-tw-10:y=10:line_spacing=10, drawtext=fontfile=C\\:/Windows/Fonts/arial.ttf:text='Phan Anh Tran, Pham Huy Hoang, Le Duy Duc':fontcolor=white:fontsize=15:x=w-tw-10:y=h-th-10:line_spacing=10, drawtext=fontfile=C\\:/Windows/Fonts/arial.ttf:text='AV1/AAC':fontcolor=yellow:fontsize=36:x='100 + 200*cos(t)':y='100 + 100*sin(t)', drawtext=fontfile=C\\:/Windows/Fonts/arial.ttf:text='GROUP 14':fontcolor=red:fontsize=30:x='mod(t*100\, w-tw)':y='50 + 30*sin(t*2)'" -c:a copy graphic.mkv (overplaying graphic)
+
+ffmpeg -i graphic.mkv -vf "select='gte(random(0)*1, 0.5)'" -vsync vfr discard4.mkv (discard packet)
+
+ffmpeg -re -i discard4.mkv -c:v libsvtav1 -b:v 100k -preset 6 -f matroska udp://192.168.100.216:1234
+ ( máy gửi)
+
+ffmpeg -i udp://192.168.100.216:1234 -c copy "C:\Users\ADMIN88\Desktop\Stuff\Compress\Compress 2\Reworked\received4.mkv"
+( máy nhận)
+
+ffmpeg -i input.mkv -i received1.mkv -lavfi psnr="stats_file=psnr1.log" -f null - (calculate psnr)
+
+ffmpeg -i input.mkv -i received1.mkv -lavfi ssim="stats_file=ssim1.log" -f null - (calculate ssim)
+
+Vid1: 1000k 50%
+Vid2: 500k 25%
+Vid3: 250k 75%
+Vid4: 100k 50%
+Vid5: 50k 25%

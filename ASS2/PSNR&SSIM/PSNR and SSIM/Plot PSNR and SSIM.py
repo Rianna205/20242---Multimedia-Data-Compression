@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 
 # Dữ liệu đầu vào
 labels = ['Video1', 'Video2', 'Video3', 'Video4', 'Video5']
-psnr_values = [26.85, 27.74, 25.29, 26.77, 27.43]
-ssim_values = [0.9451, 0.9426, 0.9405, 0.9355, 0.9256]
+psnr_values = [45.77, 43.43, 38.37 , 34.15, 29.25]
+ssim_values = [0.9940, 0.9905, 0.9839, 0.9786, 0.9479]
 
 # Thiết lập kích thước
 plt.figure(figsize=(12, 5))
